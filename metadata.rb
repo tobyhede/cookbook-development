@@ -6,6 +6,7 @@ description      "Installs/Configures development"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.1.3"
 
+depends "apt"
 depends "rbenv", "1.4.1"
-depends "postgresql", "2.0.2"
-depends "database", "1.3.4"
+depends "postgresql"
+depends "database"
