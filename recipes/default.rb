@@ -34,11 +34,12 @@ include_recipe "apt"
 include_recipe "rbenv::default"
 include_recipe "rbenv::ruby_build"
 
-include_recipe "database"
-include_recipe "postgresql::ppa_pitti_postgresql"
-include_recipe "postgresql::client"
+
+# include_recipe "postgresql::ppa_pitti_postgresql"
+# include_recipe "postgresql::client"
 include_recipe "postgresql::server"
 include_recipe "postgresql::ruby"
+include_recipe "database"
 
 rbenv_ruby node["rbenv_ruby"]["ruby_version"] do
   ruby_version node['rbenv_ruby']['ruby_version']
@@ -69,8 +70,6 @@ end
 #   action [:add]
 #   key "http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc"
 # end
-
-
 
 
 postgresql_database 'octane_dev' do

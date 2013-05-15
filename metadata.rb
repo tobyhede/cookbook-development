@@ -7,6 +7,6 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.1.3"
 
 depends "apt"
-depends "rbenv", "1.4.1"
+depends "rbenv"
 depends "postgresql"
 depends "database"
