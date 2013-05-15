@@ -15,8 +15,8 @@
       "ruby_version": "1.9.3-p392"
     },
     "postgresql": {
-      "version": "9.2",
-      "enable_pitti_ppa": "true",
+      // "version": "9.2",
+      // "enable_pitti_ppa": "true",
       "password": {
         "postgres": "pwd"
       }

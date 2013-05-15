@@ -28,13 +28,13 @@ Vagrant.configure("2") do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   # config.vm.box = "precise32"
   # config.vm.box = "lucid32"
-  config.vm.box = "precise-server-cloud-amd64"
+  config.vm.box = "precise-server-cloud-32"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://files.vagrantup.com/precise32.box"
   # config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
-  config.vm.box_url = "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box"
+  config.vm.box_url = "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-i386-disk1.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
