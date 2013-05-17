@@ -1,7 +1,3 @@
-default["locale"]["lang"] = "en_US.utf8"
-
-default["rbenv_ruby"]["ruby_version"] = "1.9.3-p392"
-default["rbenv_ruby"]["global"] = "true"
 
 
 # default["postgresql"]["dir"] = "/opt/postgresql"

@@ -9,22 +9,6 @@
       "sudo": {
         "users": [ "vagrant" ]
       }
-    },
-    "rbenv_ruby": {
-      "global": "true",
-      "ruby_version": "1.9.3-p392"
-    },
-    "postgresql": {
-      // "version": "9.2",
-      // "enable_pitti_ppa": "true",
-      "password": {
-        "postgres": "pwd"
-      }
-    },
-    "rbenv": {
-      "group_users": [
-        "vagrant"
-      ]
     }
   },
   "chef_type": "role",
@@ -35,3 +19,4 @@
   "env_run_lists": {
   }
 }
+
