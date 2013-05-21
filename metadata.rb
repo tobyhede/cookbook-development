@@ -6,8 +6,12 @@ description      "Installs/Configures development"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.1.3"
 
+depends "ubuntu"
 depends "apt"
 depends "rbenv"
 depends "golang"
 depends "postgresql"
 depends "database"
+depends "java", "1.11.4"
+depends "elasticsearch"
+
