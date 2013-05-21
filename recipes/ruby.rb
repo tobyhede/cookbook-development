@@ -1,5 +1,8 @@
+#
+# Cookbook Name:: development
+# Recipe:: ruby
 
-node.rbenv_ruby.ruby_version  = "1.9.3-p392"
+node.set.rbenv_ruby.ruby_version  = "1.9.3-p392"
 node.set.rbenv_ruby.global    = "true"
 node.set.rbenv.group_users    = ["vagrant"]
 

@@ -16,9 +16,9 @@ ruby_block "apt-get-update" do
   action :create
 end
 
-include_recipe "development:ruby"
-include_recipe "development:go"
-# include_recipe "postgresql"
+include_recipe "development::ruby"
+include_recipe "development::go"
+# include_recipe "development::postgresql"
 
 
 # directory node["postgresql"]["dir"] do

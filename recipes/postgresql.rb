@@ -1,3 +1,6 @@
+#
+# Cookbook Name:: development
+# Recipe:: postgresql
 
 node.set.postgresql.version          = "9.2"
 node.set.postgresql.enable_pitti_ppa = "true",
