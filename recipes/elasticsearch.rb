@@ -4,6 +4,8 @@
 
 # node.set.java.remove_deprecated_packages = true
 node.set.java.jdk_version = "7"
+node['java']['jdk_version'] = "7"
+
 node.set.java.install_flavor = "openjdk"
 
 node.set.elasticsearch.cluster_name = "test"
