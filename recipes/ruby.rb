@@ -2,9 +2,9 @@
 # Cookbook Name:: development
 # Recipe:: ruby
 
-node.set.rbenv_ruby.ruby_version  = "1.9.3-p392"
-node.set.rbenv_ruby.global    = "true"
-node.set.rbenv.group_users    = ["vagrant"]
+node.set['rbenv_ruby']['ruby_version']  = "1.9.3-p392"
+node.set['rbenv_ruby']['global']    = "true"
+node.set['rbenv']['group_users']    = ["vagrant"]
 
 include_recipe "rbenv::default"
 include_recipe "rbenv::ruby_build"
