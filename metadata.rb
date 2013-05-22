@@ -12,6 +12,6 @@ depends "rbenv"
 depends "golang"
 depends "postgresql"
 depends "database"
-depends "java", "1.11.4"
+depends "java"
 depends "elasticsearch"
 

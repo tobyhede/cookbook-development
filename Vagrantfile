@@ -14,11 +14,15 @@ Vagrant.configure("2") do |config|
 
     chef.node_name = "ziggurat-dev"
 
-    chef.add_role "Server"
     chef.add_role "Development"
   end
 
+  config.ssh.forward_agent = true
+  # config.ssh.private_key_path = "/home/tobyhede/.ssh/id_rsa"
+
   # config.vm.synced_folder "/home/tobyhede/.ssh", "/home/vagrant/.ssh"
+  config.vm.synced_folder "/home/tobyhede/Dropbox/Projects", "/home/vagrant/src/"
+
   # config.vm.synced_folder "/home/tobyhede/ninefold/octane", "/home/vagrant/src/octane"
 
   # All Vagrant configuration is done here. The most common configuration
