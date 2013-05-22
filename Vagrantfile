@@ -17,6 +17,9 @@ Vagrant.configure("2") do |config|
     chef.add_role "Development"
   end
 
+  # config.vm.network :forwarded_port, guest: 8080, host: 9080
+  config.vm.network :forwarded_port, guest: 9200, host: 9201
+
   config.ssh.forward_agent = true
   # config.ssh.private_key_path = "/home/tobyhede/.ssh/id_rsa"
 
