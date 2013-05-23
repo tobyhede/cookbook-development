@@ -2,11 +2,14 @@
 # Cookbook Name:: development
 # Recipe:: postgresql
 
-node.set['postgresql']['version']          = "9.2"
-node.set['postgresql']['enable_pitti_ppa'] = "true",
-node.set['postgresql']['password']         = {postgres: "pwd"}
+node.set['postgresql']['version'] = "9.2"
+node.set['postgresql']['enable_pgdg_apt'] = true
+node.set['postgresql']['password'] = {postgres: "pwd"}
+# node.set['postgresql']['client']['packages']  = ["postgresql-client-9.2"]
+# node.set['postgresql']['server']['packages'] = ["postgresql-9.2"]
 
-node.set['locale']['lang']                 = "en_US.utf8"
+
+node.set['locale']['lang'] = "en_US.utf8"
 
 execute "Update locale" do
   command "update-locale LANGUAGE=#{node[:locale][:lang]}"
@@ -14,29 +17,12 @@ execute "Update locale" do
 end
 
 
-# include_recipe "postgresql::ppa_pitti_postgresql"
+include_recipe "postgresql::apt_pgdg_postgresql"
 # include_recipe "postgresql::client"
 include_recipe "postgresql::server"
-include_recipe "postgresql::ruby"
-include_recipe "database"
+# include_recipe "postgresql::ruby"
+include_recipe "database::postgresql"
 
-# apt_repository 'pitti-postgresql-ppa' do
-#   uri 'http://ppa.launchpad.net/pitti/postgresql/ubuntu'
-#   distribution node['lsb']['codename']
-#   components %w(main)
-#   keyserver 'keyserver.ubuntu.com'
-#   key '8683D8A2'
-#   action :add
-# end
-
-# apt_repository("apt.postgresql.org") do
-#   uri "http://apt.postgresql.org/pub/repos/apt"
-#   components ["main"]
-#   # distribution "lucid-pgdg"
-#   distribution node['lsb']['codename']
-#   action [:add]
-#   key "http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc"
-# end
 
 
 postgresql_database 'octane_dev' do
