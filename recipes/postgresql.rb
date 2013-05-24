@@ -3,12 +3,14 @@
 # Recipe:: postgresql
 
 node.set['postgresql']['version'] = "9.2"
+node.set['postgresql']['dir'] = "/etc/postgresql/9.2/main"
 node.set['postgresql']['enable_pgdg_apt'] = true
 node.set['postgresql']['password'] = {postgres: "pwd"}
+node.set['postgresql']['config']['ssl'] = false
+
+
 # node.set['postgresql']['client']['packages']  = ["postgresql-client-9.2", "libpq-dev"]
 # node.set['postgresql']['server']['packages'] = ["postgresql-9.2"]
-
-
 
 node.set['locale']['lang'] = "en_US.utf8"
 
