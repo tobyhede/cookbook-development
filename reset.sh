@@ -1,5 +1,5 @@
 #!/bin/zsh
-/usr/bin/vagrant destroy
+/usr/bin/vagrant destroy --force
 yes | knife client delete ziggurat-dev
 yes | knife node delete ziggurat-dev
 /usr/bin/vagrant up
