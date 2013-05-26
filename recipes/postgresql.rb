@@ -3,6 +3,7 @@
 # Recipe:: postgresql
 
 node.set['postgresql']['version'] = "9.2"
+node.set['postgresql']['dir'] = "/var/lib/postgresql/#{node['postgresql']['version']}/main"
 # node.set['postgresql']['dir'] = "/etc/postgresql/9.2/main"
 node.set['postgresql']['enable_pgdg_apt'] = true
 node.set['postgresql']['password'] = {postgres: "pwd"}
@@ -18,9 +19,9 @@ execute "Update locale" do
   not_if "cat /etc/default/locale | grep -qx LANGUAGE=#{node[:locale][:lang]}"
 end
 
-execute "PURGE" do
-  command "yes | sudo apt-get --purge remove postgresql\*"
-end
+# execute "PURGE" do
+#   command "yes | sudo apt-get --purge remove postgresql\*"
+# end
 
 include_recipe "postgresql::apt_pgdg_postgresql"
 # include_recipe "postgresql::client"
