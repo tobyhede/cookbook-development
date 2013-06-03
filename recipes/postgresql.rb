@@ -70,7 +70,17 @@ end
 # end
 
 # include_recipe "postgresql::client"
+
 # include_recipe "postgresql::server"
+
+# apt-get install -t precise-pgdg postgresql-client-9
+package "postgresql-client-9.3" do
+  options("--target-release precise-pgdg")
+end
+
+
+include_recipe "postgresql::server"
+
 # include_recipe "postgresql::ruby"
 # include_recipe "database::postgresql"
 
