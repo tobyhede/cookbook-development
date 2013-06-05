@@ -12,10 +12,14 @@ node.set[:postgresql_src][:packages]    = %w{build-essential libreadline6-dev zl
 
 node.set[:postgresql_src][:data_dir]    = "/usr/local/pgsql/data"
 
+node.set[:postgresql_src][:bin_dir]    = "/usr/local/pgsql/bin"
+
+
 puts "========================================"
 puts node[:postgresql_src][:version]
 puts node[:postgresql_src][:remote_tar]
 puts "========================================"
+
 
 tarfile = "#{Chef::Config[:file_cache_path]}/postgresql-#{node[:postgresql_src][:version]}.tar.gz"
 src_dir = "#{Chef::Config[:file_cache_path]}/postgresql-#{node[:postgresql_src][:version]}"
@@ -43,11 +47,43 @@ bash 'install postgres from source' do
     make install
   EOH
 
-  # environment 'CFLAGS' => '-lintl',
-  #             'FFLAGS' => '-m64',
-  #             'LDFLAGS' => '-Wl,-R/opt/local/lib -L/opt/local/lib -lintl'
-  # not_if "ls -1 #{bin_dir}/postgres"
+  not_if "ls -1 #{node[:postgresql_src][:bin_dir]}/postgres"
 end
+
+# user "postgres" do
+#   action :create
+# end
+
+group "postgres" do
+  action :create
+end
+
+# create postgres user if not already there
+user "postgres" do
+  comment "PostgreSQL User"
+  group "postgres"
+  home "/var/pgsql"
+  action :create
+end
+
+# execute "sudo adduser postgres" do
+#   command "sudo adduser postgres"
+#   action :run
+# end
+
+directory node[:postgresql_src][:data_dir] do
+  owner "postgres"
+  group "postgres"
+  mode 0700
+  action :create
+end
+
+execute "initdb" do
+  user "postgres"
+  command "#{node[:postgresql_src][:bin_dir]}/initdb -D #{node[:postgresql_src][:data_dir]}"
+  action :run
+end
+
 
 
 # include_recipe 'postgres::contrib'
