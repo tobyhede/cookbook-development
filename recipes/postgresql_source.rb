@@ -12,7 +12,14 @@ node.set[:postgresql_src][:packages]    = %w{build-essential libreadline6-dev zl
 
 node.set[:postgresql_src][:data_dir]    = "/usr/local/pgsql/data"
 
-node.set[:postgresql_src][:bin_dir]    = "/usr/local/pgsql/bin"
+node.set[:postgresql_src][:bin_dir]     = "/usr/local/pgsql/bin"
+
+
+node.set[:postgresql_src][:connections] = {
+    "127.0.0.1/0" => "trust"
+}
+node.set[:postgresql_src][:replication] = {}
+
 
 
 puts "========================================"
@@ -71,6 +78,14 @@ end
 #   action :run
 # end
 
+include_recipe "sudo::default"
+
+sudo "postgres" do
+  user      "postgres"
+  nopasswd  true
+end
+
+
 directory node[:postgresql_src][:data_dir] do
   owner "postgres"
   group "postgres"
@@ -83,6 +98,36 @@ execute "initdb" do
   command "#{node[:postgresql_src][:bin_dir]}/initdb -D #{node[:postgresql_src][:data_dir]}"
   action :run
 end
+
+
+template "#{node[:postgresql_src][:data_dir]}/pg_hba.conf" do
+  source "pg_hba.conf.erb"
+  owner "postgres"
+  group "postgres"
+  mode "0600"
+  # notifies :reload, "service[#{service_name}]"
+  variables(connections: node[:postgresql_src][:connections])
+          #(replication: node[:postgresql_src][:replication])
+end
+
+
+execute "postgres" do
+  user "postgres"
+  command "#{node[:postgresql_src][:bin_dir]}/postgres -D #{node[:postgresql_src][:data_dir]}"
+  action :run
+end
+
+# template "#{data_dir}/postgresql.conf" do
+#   source 'postgresql.conf.erb'
+#   owner os_user
+#   group os_group
+#   mode '0600'
+#   notifies :reload, "service[#{service_name}]"
+#   variables config.to_hash.merge('listen_addresses' => node['postgres']['listen_addresses'])
+# end
+
+
+
 
 
 

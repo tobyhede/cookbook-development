@@ -14,4 +14,4 @@ depends "postgresql"
 depends "database"
 depends "java"
 depends "elasticsearch"
-
+depends "sudo"
