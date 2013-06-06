@@ -78,8 +78,6 @@ end
 #   action :run
 # end
 
-include_recipe "sudo::default"
-
 sudo "postgres" do
   user      "postgres"
   nopasswd  true
@@ -106,8 +104,8 @@ template "#{node[:postgresql_src][:data_dir]}/pg_hba.conf" do
   group "postgres"
   mode "0600"
   # notifies :reload, "service[#{service_name}]"
-  variables(connections: node[:postgresql_src][:connections])
-          #(replication: node[:postgresql_src][:replication])
+  variables(connections: node[:postgresql_src][:connections],
+            replication: node[:postgresql_src][:replication])
 end
 
 
