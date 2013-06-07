@@ -14,18 +14,22 @@ node.set[:postgresql_src][:data_dir]    = "/usr/local/pgsql/data"
 
 node.set[:postgresql_src][:bin_dir]     = "/usr/local/pgsql/bin"
 
+node.set[:postgresql_src][:connections] = {"10.0.0.0/16" => "trust"}
 
-node.set[:postgresql_src][:connections] = {
-    "127.0.0.1/0" => "trust"
-}
 node.set[:postgresql_src][:replication] = {}
 
 
+conf = {
+  listen_addresses: "*"
+}
 
-puts "========================================"
-puts node[:postgresql_src][:version]
-puts node[:postgresql_src][:remote_tar]
-puts "========================================"
+node.set[:postgresql_src][:conf]        = conf
+
+
+# puts "========================================"
+# puts node[:postgresql_src][:version]
+# puts node[:postgresql_src][:remote_tar]
+# puts "========================================"
 
 
 tarfile = "#{Chef::Config[:file_cache_path]}/postgresql-#{node[:postgresql_src][:version]}.tar.gz"
@@ -109,11 +113,21 @@ template "#{node[:postgresql_src][:data_dir]}/pg_hba.conf" do
 end
 
 
+template "#{node[:postgresql_src][:data_dir]}/postgresql.conf" do
+  source "postgresql.conf.erb"
+  owner "postgres"
+  group "postgres"
+  mode "0600"
+  variables(conf: node.set[:postgresql_src][:conf])
+end
+
 execute "postgres" do
   user "postgres"
   command "#{node[:postgresql_src][:bin_dir]}/postgres -D #{node[:postgresql_src][:data_dir]}"
   action :run
 end
+
+
 
 # template "#{data_dir}/postgresql.conf" do
 #   source 'postgresql.conf.erb'

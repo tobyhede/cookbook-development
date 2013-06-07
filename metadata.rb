@@ -8,10 +8,12 @@ version          "0.1.3"
 
 depends "ubuntu"
 depends "apt"
-depends "rbenv"
-depends "golang"
-depends "postgresql"
-depends "database"
-depends "java"
-depends "elasticsearch"
 depends "sudo"
+
+# depends "rbenv"
+# depends "golang"
+# depends "postgresql"
+# depends "database"
+# depends "java"
+# depends "elasticsearch"
+
