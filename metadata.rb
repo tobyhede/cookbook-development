@@ -10,10 +10,11 @@ depends "ubuntu"
 depends "apt"
 depends "sudo"
 
+depends "golang"
 depends "postgresql-src"
 
 # depends "rbenv"
-# depends "golang"
+
 # depends "postgresql"
 # depends "database"
 # depends "java"

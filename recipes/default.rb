@@ -6,7 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-
+#
 include_recipe "apt"
 
 ruby_block "apt-get-update" do
@@ -17,17 +17,12 @@ ruby_block "apt-get-update" do
 end
 
 # include_recipe "development::ruby"
-# include_recipe "development::go"
 # include_recipe "development::elasticsearch"
 # include_recipe "development::postgresql"
-include_recipe "development::postgresql_source"
 
-include_recipe "sudo::default"
-
-sudo "vagrant" do
-  user      "vagrant"
-  nopasswd  true
-end
+include_recipe "development::go"
+include_recipe "development::revel"
+# include_recipe "postgresql-src::default"
 
 
 
