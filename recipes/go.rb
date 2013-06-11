@@ -2,7 +2,7 @@
 # Cookbook Name:: development
 # Recipe:: go
 
-
+# /usr/lib/go/
 node.set[:go][:gopath] = "/opt/gocode"
 
 include_recipe "golang::default"
@@ -17,6 +17,7 @@ directory node[:go][:gopath] do
   mode 0755
   action :create
 end
+
 
 magic_shell_environment 'GOPATH' do
   value node[:go][:gopath]
