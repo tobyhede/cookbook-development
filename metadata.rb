@@ -11,6 +11,7 @@ depends "apt"
 depends "sudo"
 
 depends "golang"
+depends "magic_shell"
 depends "postgresql-src"
 
 # depends "rbenv"

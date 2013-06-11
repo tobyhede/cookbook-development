@@ -2,23 +2,15 @@
 # Cookbook Name:: development
 # Recipe:: revel
 
-package %w{mercurial git-core} do
-  action :install
+%w{mercurial git-core}.each do |package_name|
+  package package_name do
+    action :install
+  end
 end
 
 execute "revel" do
   command "go get github.com/robfig/revel/revel"
   action :run
-end
-
-
-bash "GOPATH /etc/environment" do
-  code <<-EOH
-    export PATH="$PATH:$GOPATH/bin
-    echo 'PATH="$PATH:$GOPATH/bin"' >> /etc/environment
-  EOH
-
-  not_if "echo $GOPATH"
 end
 
 
